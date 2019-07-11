@@ -1,7 +1,7 @@
 import React from 'react';
 import { ValidateBase } from './helpers';
 
-export default function useValidator(minimumFilled: number) {
+export default function useValidator(minimumFilled?: number) {
   const [number, setNumber] = React.useState(0);
 
   React.useEffect(() => {

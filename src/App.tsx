@@ -9,7 +9,7 @@ export default function App() {
   const [value3, setValue3] = React.useState('');
 
   // validator
-  const {isValid, Validate} = useValidator(2);
+  const {isValid, Validate} = useValidator();
 
   return (
     <div className="App">
