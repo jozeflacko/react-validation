@@ -1,25 +1,22 @@
 import React from 'react';
-import { IValidator, renderValidatorChild, IOptions } from './helpers';
+import { IValidator, renderValidatorChild, VALIDATE_CLASS } from './helpers';
+import Subscribe from './Subscribe';
 
-// global validator
-export default function Validate(props: { children: any } & IValidator) {
-  if (props.children) {
-    return props.children.map
-      ?
-      props.children.map((child: any, index: any) => renderValidatorChild(props, child, index))
-      :
-      renderValidatorChild(props, props.children, '');
-  }
-  return null;
+interface IValidate extends IValidator {
+	children: React.ReactElement | React.ReactElement[];
 }
 
-// listener
-export function useValidator(options?: IOptions) {
-  const [number, setNumber] = React.useState(0);
-  React.useEffect(() => setNumber(document.querySelectorAll('.error').length), [number]);
-  return {
-    isValid: (number === 0),
-    Validate // for multiple page validators
-  };
+const Validate = ({ children, ...props }: IValidate) => {
+	let render;
+
+	if (children instanceof Element) {
+		render = renderValidatorChild(props, children, '');
+	} else if (Array.isArray(children)) {
+		render = children.map((child: any, index: any) => renderValidatorChild(props, child, index));
+	}
+	return <div className={VALIDATE_CLASS} data-value={props.value}>{render}</div>;
 }
 
+Validate.Subscribe = Subscribe;
+
+export default Validate;
