@@ -15,7 +15,7 @@ function Example() {
 	const [value2, setValue2] = React.useState('');
 
 	return (
-		<div>
+		<Validate.Context>
 			<input value={value1} onChange={e => setValue1(e.target.value)} />
 			<Validate value={value1}>
 				<DoesNotContain substring={'Hi'} />
@@ -39,6 +39,6 @@ function Example() {
 						</button>
 				)}
 			</Validate.Subscribe>
-		</div>
+		</Validate.Context>
 	);
 }

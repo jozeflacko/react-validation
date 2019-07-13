@@ -30,21 +30,18 @@ export interface IOptions {
     Validate: JSX.Element // to pass here validator
 }
 
-export function hasErrors(domElement: HTMLElement) {
-
-    const body = domElement.closest('body');
-    if (!body) {
+export function hasErrors(context: HTMLElement) {
+    if (!context) {
         return false;
     }
-    return body.querySelectorAll('.' + ERROR_CLASS).length;
+    return context.querySelectorAll('.' + ERROR_CLASS).length;
 }
 
-export function getNumberOfNonEmptyFields(domElement: HTMLElement) {
-    const body = domElement.closest('body');
-    if (!body) {
+export function getNumberOfNonEmptyFields(context: HTMLElement) {
+    if (!context) {
         return false;
     }
-    const validateElements = body.querySelectorAll('.' + VALIDATE_CLASS);
+    const validateElements = context.querySelectorAll('.' + VALIDATE_CLASS);
     let numberOfNonEmptyFields = 0;
 
     for (let i = 0; i < validateElements.length; i++) {

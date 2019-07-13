@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { IValidator, hasErrors, getNumberOfNonEmptyFields } from './helpers';
+import Context from './Context';
 
 interface IValidateSubscribe extends IValidator {
 	children: (isAllValid: boolean) => React.ReactNode;
@@ -8,19 +9,18 @@ interface IValidateSubscribe extends IValidator {
 
 export default function Subscribe ({ children, minimumNonEmptyFields = 0 }: IValidateSubscribe) {
 
-	const ref = React.useRef(null);
 	const [isValid, setIsValid] = React.useState(false);
 
 	useEffect(() => {
-		const current: any = ref.current;
-		if (current) {
-            const _hasErrors = !hasErrors(current);
-            const _minimumNonEmptyFieldsIsEnough = getNumberOfNonEmptyFields(current) >= minimumNonEmptyFields;
+		const context = Context.getContext();
+		if (context) {
+            const _hasErrors = !hasErrors(context);
+            const _minimumNonEmptyFieldsIsEnough = getNumberOfNonEmptyFields(context) >= minimumNonEmptyFields;
 
 
 			setIsValid(() => _hasErrors && _minimumNonEmptyFieldsIsEnough );
 		}
 	});
 
-	return <div ref={ref} className='validate_subscribe'>{children(isValid)}</div>
+	return <div className='validate_subscribe'>{children(isValid)}</div>
 }
