@@ -46,7 +46,7 @@ export function getNumberOfNonEmptyFields(context: HTMLElement) {
 
     for (let i = 0; i < validateElements.length; i++) {
         const value = validateElements[i].getAttribute('data-value');
-        if(value != null && value != '') {
+        if(value != null && value !== '') {
             numberOfNonEmptyFields++;
         }
     }

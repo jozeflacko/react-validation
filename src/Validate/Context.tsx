@@ -6,17 +6,11 @@ interface IContext {
 
 export default class Context extends React.Component<IContext> {
 
-    private ref: any = null;
-
     private static context: any = null;
 
     constructor(props: IContext) {
         super(props);
-        this.ref = React.createRef();
-    }
-
-    private static setContext(ref: any) {
-        Context.setContext(ref != null ? ref.current : null);
+        Context.context = React.createRef();
     }
 
     static getContext() {
@@ -24,6 +18,6 @@ export default class Context extends React.Component<IContext> {
     }
 
     render() {
-        return <div ref={this.ref} className='validate_context'>{this.props.children}</div>
+        return <div ref={Context.context} className='validate_context'>{this.props.children}</div>
     }
 }

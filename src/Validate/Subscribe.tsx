@@ -7,19 +7,15 @@ interface IValidateSubscribe extends IValidator {
 	minimumNonEmptyFields?: number;
 }
 
-export default function Subscribe ({ children, minimumNonEmptyFields = 0 }: IValidateSubscribe) {
+export default function Subscribe({ children, minimumNonEmptyFields = 0 }: IValidateSubscribe) {
 
 	const [isValid, setIsValid] = React.useState(false);
 
 	useEffect(() => {
 		const context = Context.getContext();
-		if (context) {
-            const _hasErrors = !hasErrors(context);
-            const _minimumNonEmptyFieldsIsEnough = getNumberOfNonEmptyFields(context) >= minimumNonEmptyFields;
-
-
-			setIsValid(() => _hasErrors && _minimumNonEmptyFieldsIsEnough );
-		}
+		const _hasErrors = !hasErrors(context);
+		const _minimumNonEmptyFieldsIsEnough = getNumberOfNonEmptyFields(context) >= minimumNonEmptyFields;
+		setIsValid(_hasErrors && _minimumNonEmptyFieldsIsEnough);
 	});
 
 	return <div className='validate_subscribe'>{children(isValid)}</div>
