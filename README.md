@@ -4,7 +4,7 @@ Just a weekend project when I was thinking how I could easily validate forms in 
 
 ### Screenshot
 <p style='max-width:360px;'>
-	<img src="https://rawgit.com/jozeflacko/react-validation/master/img/index.jpg" alt="snippet">
+	<img src="https://github.com/jozeflacko/react-validation/blob/master/img/index.jpg?raw=true" alt="snippet">
 </p> 
 
 ## Authors
